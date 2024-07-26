@@ -1,5 +1,6 @@
 from langchain.prompts.prompt import PromptTemplate
 from langchain_openai import ChatOpenAI
+# from langchain_community.chat_models import ChatOllama
 
 summary_template = """
     Based on the information {information} provided, I want you to:
@@ -16,6 +17,9 @@ summary_prompt_template = PromptTemplate(
 )
 # temperature decides how creative the model will be, 0 means no creativity
 llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+
+# use Ollama for a local llm
+# llm = ChatOllama(model="llama3")
 
 chain = summary_prompt_template | llm
 
