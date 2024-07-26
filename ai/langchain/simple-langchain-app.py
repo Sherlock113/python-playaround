@@ -1,4 +1,5 @@
 from langchain.prompts.prompt import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
 # from langchain_community.chat_models import ChatOllama
 
@@ -17,11 +18,10 @@ summary_prompt_template = PromptTemplate(
 )
 # temperature decides how creative the model will be, 0 means no creativity
 llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
-
-# use Ollama for a local llm
 # llm = ChatOllama(model="llama3")
 
-chain = summary_prompt_template | llm
+# Define a chain and format the output
+chain = summary_prompt_template | llm | StrOutputParser()
 
 result = chain.invoke(input={"information": information})
-print(result.content)
+print(result)
