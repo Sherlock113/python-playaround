@@ -25,7 +25,6 @@ def get_post(id):
 
 
 # Add the following code to run this script directly
-# Alternatively, run `flask --app hello run`
 if __name__ == "__main__":
     # Set debug to True to enable hot reloading
     app.run(debug=True)
