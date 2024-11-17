@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+<!-- Override or add custom styles -->
+{% block styles %}
+    {{ super() }} <!-- This ensures default styles from base.html are included -->
+    <style>
+        body {
+            background-color: #f0f8ff; /* Custom background color for login page */
+        }
+        h1 {
+            color: #ff4500; /* Custom header color for login page */
+        }
+        .container {
+            max-width: 400px; /* Limit container width for login page */
+            margin: 50px auto; /* Center container on the page */
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Login</h1>
+    <!-- use `novalidate` to disable the default validation in web browsers -->
+    <form method="POST" action=" {{ url_for('login') }}" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.email.label }} <br> {{ form.email(size=30) }}
+            {% if form.email.errors %}
+            {% for error in form.email.errors %}
+            <span style="color: red">{{ error }}</span>
+            {% endfor %}
+            {% endif %}
+        </p>
+        <p>
+            {{ form.password.label }} <br> {{ form.password(size=30) }}
+            {% if form.password.errors %}
+            {% for error in form.password.errors %}
+            <span style="color: red">{{ error }}</span>
+            {% endfor %}
+            {% endif %}
+        </p>
+        {{ form.submit }}
+    </form>
+</div>
+{% endblock %}
